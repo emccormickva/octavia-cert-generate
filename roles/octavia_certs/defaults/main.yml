@@ -1,0 +1,46 @@
+---
+# Copyright 2017, Rackspace US, Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# Certificate generation
+# this directory needs to be accessible
+octavia_cert_dir: "{{ lookup('env', 'HOME') }}/octavia-certs"
+octavia_cert_user: "{{ lookup('env', 'USER') }}"
+octavia_cert_key_length_server: '4096' # key length
+octavia_cert_cipher_server: 'aes256'
+octavia_cert_cipher_client: 'aes256'
+octavia_cert_key_length_client: '4096' # key length
+octavia_cert_server_ca_subject: '/C=US/ST=Denial/L=Nowhere/O=Dis/CN=www.example.com' # change this to something more real
+octavia_cert_client_ca_subject: '/C=US/ST=Denial/L=Nowhere/O=Dis/CN=www.example.com' # change this to something more real
+octavia_cert_client_req_common_name: 'www.example.com' # change this to something more real
+octavia_cert_client_req_country_name: 'US'
+octavia_cert_client_req_state_or_province_name: 'Denial'
+octavia_cert_client_req_locality_name: 'Nowhere'
+octavia_cert_client_req_organization_name: 'Dis'
+octavia_cert_validity_days: 1825 # 5 years
+octavia_generate_client_cert: True # generate self signed client certs
+octavia_generate_certs: True
+
+# client certs
+octavia_client_ca_key: "{{ octavia_cert_dir }}/ca_01.key"
+octavia_client_ca: "{{ octavia_cert_dir }}/ca_01.pem"
+octavia_client_cert: "{{ octavia_cert_dir }}/client.pem"
+# server
+octavia_server_ca: "{{ octavia_ca_certificate }}"
+# ca certs
+octavia_ca_private_key: "{{ octavia_cert_dir }}/private/cakey.pem"
+octavia_ca_private_key_passphrase: "{{ octavia_cert_client_password }}"
+octavia_ca_certificate: "{{ octavia_cert_dir }}/ca_server_01.pem"
+octavia_signing_digest: sha256
+

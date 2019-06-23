@@ -1,0 +1,8 @@
+- name: Create Octavia Certificates
+  hosts: localhost
+  roles:
+      - octavia_certs
+  vars:
+    octavia_cert_client_password: somepassword
+...
+
